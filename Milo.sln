@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37628.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{06DB8B20-AE18-4A61-8094-37F9E47C08F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{FDEEA036-E0C0-47A8-B281-AE5B8664A63A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{A878122C-2E6B-4641-B24C-D15891710689}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{62377C0E-B996-4F07-934E-F95C29B5EB7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subscription", "Subscription", "{2AF5F935-D15D-4452-A8D8-5DC4A3C2DD47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{E08407FA-511E-404B-9506-DCFA830027BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reporting", "Reporting", "{90B2B929-AC00-4292-A300-FD0AD4B31FAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Subscription.API", "src\Services\Subscription\Milo.Subscription.API\Milo.Subscription.API.csproj", "{4E768FDD-BD66-4889-9E00-3093CE726137}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Subscription.Application", "src\Services\Subscription\Milo.Subscription.Application\Milo.Subscription.Application.csproj", "{0DDE67B0-E985-45ED-89A9-C9F41E8A50E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Subscription.Domain", "src\Services\Subscription\Milo.Subscription.Domain\Milo.Subscription.Domain.csproj", "{F2FABB15-D0F3-44BD-9287-59FABE0B0F59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Subscription.Infrastructure", "src\Services\Subscription\Milo.Subscription.Infrastructure\Milo.Subscription.Infrastructure.csproj", "{7DC26D90-FFF9-417C-9D73-5A27E143C1AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Subscription.Persistence", "src\Services\Subscription\Milo.Subscription.Persistence\Milo.Subscription.Persistence.csproj", "{5B703460-BDC9-4611-9FB2-FBDEE5C17D5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Identity.API", "src\Services\Identity\Milo.Identity.API\Milo.Identity.API.csproj", "{1AB34690-630E-4EE6-9EDD-852CA8CA7420}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Identity.Persistence", "src\Services\Identity\Milo.Identity.Persistence\Milo.Identity.Persistence.csproj", "{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E768FDD-BD66-4889-9E00-3093CE726137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E768FDD-BD66-4889-9E00-3093CE726137}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E768FDD-BD66-4889-9E00-3093CE726137}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E768FDD-BD66-4889-9E00-3093CE726137}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DDE67B0-E985-45ED-89A9-C9F41E8A50E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DDE67B0-E985-45ED-89A9-C9F41E8A50E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DDE67B0-E985-45ED-89A9-C9F41E8A50E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DDE67B0-E985-45ED-89A9-C9F41E8A50E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2FABB15-D0F3-44BD-9287-59FABE0B0F59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2FABB15-D0F3-44BD-9287-59FABE0B0F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2FABB15-D0F3-44BD-9287-59FABE0B0F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2FABB15-D0F3-44BD-9287-59FABE0B0F59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DC26D90-FFF9-417C-9D73-5A27E143C1AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DC26D90-FFF9-417C-9D73-5A27E143C1AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DC26D90-FFF9-417C-9D73-5A27E143C1AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DC26D90-FFF9-417C-9D73-5A27E143C1AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B703460-BDC9-4611-9FB2-FBDEE5C17D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B703460-BDC9-4611-9FB2-FBDEE5C17D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B703460-BDC9-4611-9FB2-FBDEE5C17D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B703460-BDC9-4611-9FB2-FBDEE5C17D5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB34690-630E-4EE6-9EDD-852CA8CA7420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AB34690-630E-4EE6-9EDD-852CA8CA7420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB34690-630E-4EE6-9EDD-852CA8CA7420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AB34690-630E-4EE6-9EDD-852CA8CA7420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FDEEA036-E0C0-47A8-B281-AE5B8664A63A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A878122C-2E6B-4641-B24C-D15891710689} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{62377C0E-B996-4F07-934E-F95C29B5EB7A} = {FDEEA036-E0C0-47A8-B281-AE5B8664A63A}
+		{2AF5F935-D15D-4452-A8D8-5DC4A3C2DD47} = {FDEEA036-E0C0-47A8-B281-AE5B8664A63A}
+		{E08407FA-511E-404B-9506-DCFA830027BA} = {FDEEA036-E0C0-47A8-B281-AE5B8664A63A}
+		{90B2B929-AC00-4292-A300-FD0AD4B31FAF} = {FDEEA036-E0C0-47A8-B281-AE5B8664A63A}
+		{4E768FDD-BD66-4889-9E00-3093CE726137} = {2AF5F935-D15D-4452-A8D8-5DC4A3C2DD47}
+		{0DDE67B0-E985-45ED-89A9-C9F41E8A50E8} = {2AF5F935-D15D-4452-A8D8-5DC4A3C2DD47}
+		{F2FABB15-D0F3-44BD-9287-59FABE0B0F59} = {2AF5F935-D15D-4452-A8D8-5DC4A3C2DD47}
+		{7DC26D90-FFF9-417C-9D73-5A27E143C1AB} = {2AF5F935-D15D-4452-A8D8-5DC4A3C2DD47}
+		{5B703460-BDC9-4611-9FB2-FBDEE5C17D5F} = {2AF5F935-D15D-4452-A8D8-5DC4A3C2DD47}
+		{1AB34690-630E-4EE6-9EDD-852CA8CA7420} = {62377C0E-B996-4F07-934E-F95C29B5EB7A}
+		{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A} = {62377C0E-B996-4F07-934E-F95C29B5EB7A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D1D21C1-E4CA-4929-B9F3-595E70E00455}
+	EndGlobalSection
+EndGlobal
