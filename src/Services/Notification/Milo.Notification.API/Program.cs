@@ -2,19 +2,20 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Milo.Subscription.API.Services;
-using Milo.Subscription.Application.Features.Categories.Commands;
-using Milo.Subscription.Application.Interfaces.Repositories;
-using Milo.Subscription.Application.Interfaces.Services;
-using Milo.Subscription.Application.Mappings;
-using Milo.Subscription.Infrastructure.Security;
-using Milo.Subscription.Persistence.Context;
-using Milo.Subscription.Persistence.Repositories;
+using Milo.Notification.API.Consumers;
+using Milo.Notification.API.Context;
+using Milo.Notification.API.Services.UserServices;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+
+//PostgreSQL
+builder.Services.AddDbContext<NotificationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 //Jwt
@@ -38,39 +39,17 @@ builder.Services.AddAuthentication(options =>
 });
 
 
-//Sql
-builder.Services.AddDbContext<SubscriptionDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-//MediatR
-builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(CreateCategoryCommand).Assembly));
-
-//AutoMapper
-builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
-
-//Repository
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IPlatformRepository, PlatformRepository>();
-builder.Services.AddScoped<IAccountInfoRepository, AccountInfoRepository>();
-builder.Services.AddScoped<IUserSubscriptionRepository, UserSubscriptionRepository>();
+//Service Repository
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
-//Service Repository
-builder.Services.AddScoped<IEncryptionService, EncryptionService>();
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
-//RabbitMQ
 builder.Services.AddMassTransit(x =>
 {
+    //Save Consumer
+    x.AddConsumer<SubscriptionCreatedConsumer>();
+
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration["RabbitMQ:Host"], "/", h =>
@@ -78,8 +57,20 @@ builder.Services.AddMassTransit(x =>
             h.Username(builder.Configuration["RabbitMQ:Username"]!);
             h.Password(builder.Configuration["RabbitMQ:Password"]!);
         });
+
+        // Set consumer to lissen which queue
+        cfg.ReceiveEndpoint("subscription-created-notification", e =>
+        {
+            e.ConfigureConsumer<SubscriptionCreatedConsumer>(context);
+        });
     });
 });
+
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

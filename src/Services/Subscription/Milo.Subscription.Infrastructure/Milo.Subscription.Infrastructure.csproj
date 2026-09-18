@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Milo.Subscription.Application\Milo.Subscription.Application.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="User\" />
+    <ProjectReference Include="..\Milo.Subscription.Application\Milo.Subscription.Application.csproj" />
   </ItemGroup>
 
 </Project>

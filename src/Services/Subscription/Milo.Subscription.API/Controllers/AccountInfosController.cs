@@ -52,5 +52,12 @@ namespace Milo.Subscription.API.Controllers
             await _mediator.Send(new RemoveAccountInfoCommand(id));
             return Ok(new { message = "Hesap bilgisi silindi." });
         }
+
+        [HttpGet("{id}/password")]
+        public async Task<IActionResult> GetPassword(Guid id)
+        {
+            var result = await _mediator.Send(new GetAccountPasswordQuery(id));
+            return Ok(new { result });
+        }
     }
 }

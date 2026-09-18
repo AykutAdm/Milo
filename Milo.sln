@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.37628.2 d17.14
+VisualStudioVersion = 17.14.37628.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -32,6 +32,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Identity.API", "src\Services\Identity\Milo.Identity.API\Milo.Identity.API.csproj", "{1AB34690-630E-4EE6-9EDD-852CA8CA7420}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Identity.Persistence", "src\Services\Identity\Milo.Identity.Persistence\Milo.Identity.Persistence.csproj", "{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{CCB6743D-1347-45E5-A968-A594D4721A8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Messaging", "src\Shared\Milo.Messaging\Milo.Messaging.csproj", "{BE9E1599-F57E-4728-85C5-214C9387F61B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Notification.API", "src\Services\Notification\Milo.Notification.API\Milo.Notification.API.csproj", "{BF623662-E930-4F4A-BA3E-9B3214FDAB6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +73,14 @@ Global
 		{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE9E1599-F57E-4728-85C5-214C9387F61B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9E1599-F57E-4728-85C5-214C9387F61B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9E1599-F57E-4728-85C5-214C9387F61B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9E1599-F57E-4728-85C5-214C9387F61B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF623662-E930-4F4A-BA3E-9B3214FDAB6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF623662-E930-4F4A-BA3E-9B3214FDAB6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF623662-E930-4F4A-BA3E-9B3214FDAB6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF623662-E930-4F4A-BA3E-9B3214FDAB6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +99,9 @@ Global
 		{5B703460-BDC9-4611-9FB2-FBDEE5C17D5F} = {2AF5F935-D15D-4452-A8D8-5DC4A3C2DD47}
 		{1AB34690-630E-4EE6-9EDD-852CA8CA7420} = {62377C0E-B996-4F07-934E-F95C29B5EB7A}
 		{6E848D0F-EFDE-4B3B-A2A6-0D8E79443B8A} = {62377C0E-B996-4F07-934E-F95C29B5EB7A}
+		{CCB6743D-1347-45E5-A968-A594D4721A8F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{BE9E1599-F57E-4728-85C5-214C9387F61B} = {CCB6743D-1347-45E5-A968-A594D4721A8F}
+		{BF623662-E930-4F4A-BA3E-9B3214FDAB6C} = {E08407FA-511E-404B-9506-DCFA830027BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D1D21C1-E4CA-4929-B9F3-595E70E00455}

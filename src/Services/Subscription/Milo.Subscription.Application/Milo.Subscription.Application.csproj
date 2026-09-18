@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MassTransit" Version="9.2.2" />
     <PackageReference Include="MediatR" Version="12.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Milo.Messaging\Milo.Messaging.csproj" />
     <ProjectReference Include="..\Milo.Subscription.Domain\Milo.Subscription.Domain.csproj" />
   </ItemGroup>
 
