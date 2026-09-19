@@ -1,13 +1,16 @@
-﻿namespace Milo.Messaging.Events
+﻿namespace Milo.Reporting.API.Entities
 {
-    public class SubscriptionCreatedEvent
+    public class ReportingSubscription
     {
+        public Guid ReportingSubscriptionId { get; set; }
         public Guid UserId { get; set; }
-        public Guid PlatformId { get; set; }
+
         public string PlatformName { get; set; }
         public string CategoryName { get; set; }
         public decimal Price { get; set; }
-        public DateTime RenewalDate { get; set; }
         public string Period { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
     }
 }

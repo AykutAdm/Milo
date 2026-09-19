@@ -39,6 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Messaging", "src\Share
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Notification.API", "src\Services\Notification\Milo.Notification.API\Milo.Notification.API.csproj", "{BF623662-E930-4F4A-BA3E-9B3214FDAB6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.Reporting.API", "src\Services\Reporting\Milo.Reporting.API\Milo.Reporting.API.csproj", "{BDCC612E-4430-4A76-BA11-52E633D7CF9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milo.ApiGateway", "src\ApiGateway\Milo.ApiGateway\Milo.ApiGateway.csproj", "{E73EEE29-D69A-4D5F-875E-3AA74E95E0A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{BF623662-E930-4F4A-BA3E-9B3214FDAB6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF623662-E930-4F4A-BA3E-9B3214FDAB6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF623662-E930-4F4A-BA3E-9B3214FDAB6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDCC612E-4430-4A76-BA11-52E633D7CF9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDCC612E-4430-4A76-BA11-52E633D7CF9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDCC612E-4430-4A76-BA11-52E633D7CF9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDCC612E-4430-4A76-BA11-52E633D7CF9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E73EEE29-D69A-4D5F-875E-3AA74E95E0A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E73EEE29-D69A-4D5F-875E-3AA74E95E0A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E73EEE29-D69A-4D5F-875E-3AA74E95E0A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E73EEE29-D69A-4D5F-875E-3AA74E95E0A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +114,8 @@ Global
 		{CCB6743D-1347-45E5-A968-A594D4721A8F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{BE9E1599-F57E-4728-85C5-214C9387F61B} = {CCB6743D-1347-45E5-A968-A594D4721A8F}
 		{BF623662-E930-4F4A-BA3E-9B3214FDAB6C} = {E08407FA-511E-404B-9506-DCFA830027BA}
+		{BDCC612E-4430-4A76-BA11-52E633D7CF9A} = {90B2B929-AC00-4292-A300-FD0AD4B31FAF}
+		{E73EEE29-D69A-4D5F-875E-3AA74E95E0A2} = {A878122C-2E6B-4641-B24C-D15891710689}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D1D21C1-E4CA-4929-B9F3-595E70E00455}

@@ -44,7 +44,8 @@ namespace Milo.Subscription.Application.Features.UserSubscriptions.Handlers
                 PlatformName = platform!.PlatformName,
                 CategoryName = platform.Category.CategoryName,
                 Price = value.Price,
-                RenewalDate = value.RenewalDate
+                RenewalDate = value.RenewalDate,
+                Period = value.Period
             };
 
             await _publishEndpoint.Publish(createdEvent, cancellationToken);

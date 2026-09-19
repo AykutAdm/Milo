@@ -1,0 +1,7 @@
+﻿namespace Milo.Reporting.API.Services.UserServices
+{
+    public interface ICurrentUserService
+    {
+        Guid GetUserId();
+    }
+}

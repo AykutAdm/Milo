@@ -11,7 +11,7 @@ namespace Milo.Subscription.Application.Features.UserSubscriptions.Results
     {
         public Guid UserSubscriptionId { get; set; }
         public decimal Price { get; set; }
-        public BillingPeriod Period { get; set; }
+        public string? Period { get; set; }
         public UserSubscriptionStatus UserSubscriptionStatus { get; set; }
         public DateTime RenewalDate { get; set; }
 
