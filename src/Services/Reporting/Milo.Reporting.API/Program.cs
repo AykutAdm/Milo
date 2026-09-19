@@ -1,3 +1,6 @@
+using Elastic.Ingest.Elasticsearch;
+using Elastic.Ingest.Elasticsearch.DataStreams;
+using Elastic.Serilog.Sinks;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -6,11 +9,29 @@ using Milo.Reporting.API.Consumers;
 using Milo.Reporting.API.Context;
 using Milo.Reporting.API.Services.ReportingServices;
 using Milo.Reporting.API.Services.UserServices;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+//Serilog
+builder.Host.UseSerilog((context, configuration) =>
+{
+    var elasticUri = context.Configuration["ElasticsearchSettings:Url"]!;
+
+    configuration
+        .Enrich.FromLogContext()
+        .Enrich.WithProperty("Service", "Reporting")
+        .WriteTo.Console()
+        .WriteTo.Elasticsearch(new[] { new Uri(elasticUri) }, opts =>
+        {
+            opts.DataStream = new DataStreamName("logs", "milo", "reporting");
+            opts.BootstrapMethod = BootstrapMethod.Failure;
+        });
+});
 
 //MySQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -74,6 +95,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

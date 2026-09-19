@@ -1,3 +1,6 @@
+using Elastic.Ingest.Elasticsearch;
+using Elastic.Ingest.Elasticsearch.DataStreams;
+using Elastic.Serilog.Sinks;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +13,28 @@ using Milo.Subscription.Application.Mappings;
 using Milo.Subscription.Infrastructure.Security;
 using Milo.Subscription.Persistence.Context;
 using Milo.Subscription.Persistence.Repositories;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+//Serilog
+builder.Host.UseSerilog((context, configuration) =>
+{
+    var elasticUri = context.Configuration["ElasticsearchSettings:Url"]!;
+
+    configuration
+        .Enrich.FromLogContext()
+        .Enrich.WithProperty("Service", "Subscription")
+        .WriteTo.Console()
+        .WriteTo.Elasticsearch(new[] { new Uri(elasticUri) }, opts =>
+        {
+            opts.DataStream = new DataStreamName("logs", "milo", "subscription");
+            opts.BootstrapMethod = BootstrapMethod.Failure;
+        });
+});
 
 
 //Jwt
@@ -82,6 +102,8 @@ builder.Services.AddMassTransit(x =>
 });
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
