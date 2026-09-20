@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Milo.Subscription.Application.Exceptions;
 using Milo.Subscription.Application.Features.UserSubscriptions.Commands;
 using Milo.Subscription.Application.Interfaces.Repositories;
 using Milo.Subscription.Application.Interfaces.Services;
@@ -23,9 +24,15 @@ namespace Milo.Subscription.Application.Features.UserSubscriptions.Handlers
         {
             var value = await _repository.GetByIdAsync(request.UserSubscriptionId);
 
+            if (value is null)
+            {
+                throw new NotFoundException("Abonelik bulunamadı.");
+            }
+
+
             if (value.UserId != _currentUser.GetUserId())
             {
-                throw new Exception("Bu aboneliği güncelleme yetkiniz yok.");
+                throw new ForbiddenException("Bu aboneliği güncelleme yetkiniz yok.");
             }
 
             _mapper.Map(request, value);

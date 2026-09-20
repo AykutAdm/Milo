@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Milo.Subscription.Application.Exceptions;
 using Milo.Subscription.Application.Features.AccountInfos.Queries;
 using Milo.Subscription.Application.Interfaces.Repositories;
 using Milo.Subscription.Application.Interfaces.Services;
@@ -22,9 +23,14 @@ namespace Milo.Subscription.Application.Features.AccountInfos.Handlers
         {
             var account = await _repository.GetByIdAsync(request.AccountInfoId);
 
+            if (account is null)
+            {
+                throw new NotFoundException("Hesap bulunamadı.");
+            }
+
             if (account.UserId != _currentUserService.GetUserId())
             {
-                throw new Exception("Bu hesaba erişim yetkiniz yok.");
+                throw new ForbiddenException("Bu hesaba erişim yetkiniz yok.");
             }
 
             return _encryptionService.Decrypt(account.Password);

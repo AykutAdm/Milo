@@ -16,6 +16,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+//Cors
+builder.Services.AddCors(config =>
+{
+    config.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
+
 
 //Serilog
 builder.Host.UseSerilog((context, configuration) =>
@@ -95,6 +107,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseCors();
 
 app.UseSerilogRequestLogging();
 

@@ -5,6 +5,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Milo.Subscription.API.Middlewares;
 using Milo.Subscription.API.Services;
 using Milo.Subscription.Application.Features.Categories.Commands;
 using Milo.Subscription.Application.Interfaces.Repositories;
@@ -19,6 +20,18 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+//Cors
+builder.Services.AddCors(config =>
+{
+    config.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
 
 //Serilog
 builder.Host.UseSerilog((context, configuration) =>
@@ -82,6 +95,11 @@ builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 //Service Repository
 builder.Services.AddScoped<IEncryptionService, EncryptionService>();
 
+//Middleware
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -102,6 +120,10 @@ builder.Services.AddMassTransit(x =>
 });
 
 var app = builder.Build();
+
+app.UseCors();
+
+app.UseExceptionHandler();
 
 app.UseSerilogRequestLogging();
 

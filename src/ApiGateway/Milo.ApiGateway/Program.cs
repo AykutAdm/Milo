@@ -7,6 +7,18 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Cors
+builder.Services.AddCors(config =>
+{
+    config.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
+
 //Serilog
 builder.Host.UseSerilog((context, configuration) =>
 {
@@ -29,6 +41,8 @@ builder.Services.AddOcelot(builder.Configuration);
 
 
 var app = builder.Build();
+
+app.UseCors();
 
 app.UseSerilogRequestLogging();
 

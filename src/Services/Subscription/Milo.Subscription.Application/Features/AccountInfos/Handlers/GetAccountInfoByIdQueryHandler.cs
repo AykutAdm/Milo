@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Milo.Subscription.Application.Exceptions;
 using Milo.Subscription.Application.Features.AccountInfos.Queries;
 using Milo.Subscription.Application.Features.AccountInfos.Results;
 using Milo.Subscription.Application.Interfaces.Repositories;
@@ -23,9 +24,16 @@ namespace Milo.Subscription.Application.Features.AccountInfos.Handlers
         public async Task<GetAccountInfoByIdQueryResult> Handle(GetAccountInfoByIdQuery request, CancellationToken cancellationToken)
         {
             var value = await _repository.GetByIdAsync(request.AccountInfoId);
+
+            if (value is null)
+            {
+                throw new NotFoundException("Hesap bilgisi bulunamadı.");
+            }
+
+
             if (value.UserId != _currentUser.GetUserId())
             {
-                throw new Exception("Bu hesap bilgisine erişim yetkiniz yok.");
+                throw new ForbiddenException("Bu hesap bilgisine erişim yetkiniz yok.");
             }
 
             return _mapper.Map<GetAccountInfoByIdQueryResult>(value);
