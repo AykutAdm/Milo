@@ -12,12 +12,14 @@ namespace Milo.Subscription.Application.Features.AccountInfos.Handlers
         private readonly IAccountInfoRepository _repository;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUser;
+        private readonly IEncryptionService _encryptionService;
 
-        public UpdateAccountInfoCommandHandler(IAccountInfoRepository repository, IMapper mapper, ICurrentUserService currentUser)
+        public UpdateAccountInfoCommandHandler(IAccountInfoRepository repository, IMapper mapper, ICurrentUserService currentUser, IEncryptionService encryptionService)
         {
             _repository = repository;
             _mapper = mapper;
             _currentUser = currentUser;
+            _encryptionService = encryptionService;
         }
 
         public async Task Handle(UpdateAccountInfoCommand request, CancellationToken cancellationToken)
@@ -35,6 +37,11 @@ namespace Milo.Subscription.Application.Features.AccountInfos.Handlers
             }
 
             _mapper.Map(request, value);
+
+            if (!string.IsNullOrEmpty(request.Password))
+                value.Password = _encryptionService.Encrypt(request.Password);
+
+            value.UserId = _currentUser.GetUserId();
             await _repository.UpdateAsync(value);
         }
     }

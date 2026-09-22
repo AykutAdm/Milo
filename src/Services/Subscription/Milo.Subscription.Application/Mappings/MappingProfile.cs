@@ -40,7 +40,8 @@ namespace Milo.Subscription.Application.Mappings
 
             //AccountInfo
             CreateMap<CreateAccountInfoCommand, AccountInfo>();
-            CreateMap<UpdateAccountInfoCommand, AccountInfo>();
+            CreateMap<UpdateAccountInfoCommand, AccountInfo>()
+                .ForMember(d => d.Password, o => o.Ignore());
 
             CreateMap<AccountInfo, GetAccountInfoQueryResult>()
                  .ForMember(dest => dest.PlatformName,

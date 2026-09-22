@@ -39,6 +39,15 @@ function UserLayout() {
             <CreditCard className="h-5 w-5 shrink-0" />
             {isOpen && <span>Abonelikler</span>}
           </Link>
+
+           <Link
+            to="/accounts"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-50 transition-colors"
+          >
+            <CreditCard className="h-5 w-5 shrink-0" />
+            {isOpen && <span>Hesaplar</span>}
+          </Link>
+          
           <Link
             to="/reports"
             className="flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-50 transition-colors"

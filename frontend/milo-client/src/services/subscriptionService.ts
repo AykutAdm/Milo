@@ -1,7 +1,7 @@
 import type { Subscription } from "../types/subscription";
 import api from "./api";
 
-//Get List
+
 export const getSubscriptions = async (): Promise<Subscription[]> => {
   const response = await api.get<Subscription[]>(
     "/subscription/userSubscriptions",
@@ -9,7 +9,7 @@ export const getSubscriptions = async (): Promise<Subscription[]> => {
   return response.data;
 };
 
-//GetById
+
 export const getSubscriptionById = async (
   id: string,
 ): Promise<Subscription> => {
@@ -19,12 +19,12 @@ export const getSubscriptionById = async (
   return response.data;
 };
 
-//Delete
+
 export const deleteSubscription = async (id: string) => {
   await api.delete(`/subscription/userSubscriptions/${id}`);
 };
 
-//Create
+
 export const createSubscription = async (subscription: {
   price: number;
   period: string;

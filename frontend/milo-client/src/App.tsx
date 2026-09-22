@@ -6,7 +6,11 @@ import SubscriptionCreatePage from "./pages/subscriptions/SubscriptionCreatePage
 import SubscriptionUpdatePage from "./pages/subscriptions/SubscriptionUpdatePage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
-import UserLayout from "./layouts/userLayout";
+
+import AccountInfoPage from "./pages/accounts/AccountInfoPage";
+import UserLayout from "./layouts/UserLayout";
+import AccountInfoUpdatePage from "./pages/accounts/AccountInfoUpdatePage";
+import AccountInfoCreatePage from "./pages/accounts/AccountInfoCreatePage";
 
 function App() {
   return (
@@ -26,6 +30,11 @@ function App() {
               path="/subscription/update/:id"
               element={<SubscriptionUpdatePage />}
             />
+            <Route path="/accounts" element={<AccountInfoPage />} />
+          <Route path="/accounts/create" element={<AccountInfoCreatePage />} />
+          <Route
+            path="/accounts/update/:id"
+            element={<AccountInfoUpdatePage />}/>
           </Route>
         </Routes>
       </BrowserRouter>
