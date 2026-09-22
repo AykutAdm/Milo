@@ -1,34 +1,55 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import type { Platform } from "../../types/platform";
+import {
+  getSubscriptionById,
+  updateSubscription,
+} from "../../services/subscriptionService";
 import { getPlatforms } from "../../services/platformService";
-import { createSubscription } from "../../services/subscriptionService";
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Calendar, CreditCard, RefreshCw, Tag } from "lucide-react";
+import {
+  ArrowLeft,
+  Calendar,
+  ChevronDown,
+  CreditCard,
+  RefreshCw,
+  Tag,
+} from "lucide-react";
 
-function SubscriptionCreatePage() {
-  const navigate = useNavigate();
+function SubscriptionUpdatePage() {
+  const { id } = useParams();
   const [platforms, setPlatforms] = useState<Platform[]>([]);
   const [platformId, setPlatformId] = useState("");
   const [price, setPrice] = useState("");
   const [period, setPeriod] = useState("Aylık");
   const [renewalDate, setRenewalDate] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getPlatforms();
         setPlatforms(data);
+
+        if (id) {
+          const subscriptionData = await getSubscriptionById(id);
+          setPlatformId(subscriptionData.platformId);
+          setPrice(subscriptionData.price.toString());
+          setPeriod(subscriptionData.period);
+          setRenewalDate(subscriptionData.renewalDate.split("T")[0]);
+        }
       } catch (error) {
         console.error("Platformlar alınamadı:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   const handleSubmit = async () => {
     try {
-      await createSubscription({
+      await updateSubscription({
+        userSubscriptionId: id!,
         price: Number(price),
         period: period,
         renewalDate: renewalDate,
@@ -37,14 +58,14 @@ function SubscriptionCreatePage() {
       });
       navigate("/subscription");
     } catch (error) {
-      console.error("Abonelik eklenemedi:", error);
+      console.error("Abonelik güncellenemedi:", error);
     }
   };
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center">
-      <div className="max-w-xl w-full">
-        {/* Geri + başlık */}
+       <div className="max-w-xl w-full">
+        {/* Geri */}
         <button
           onClick={() => navigate("/subscription")}
           className="flex items-center gap-2 text-zinc-400 hover:text-zinc-50 transition-colors mb-6 text-sm"
@@ -55,10 +76,10 @@ function SubscriptionCreatePage() {
 
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-8">
           <h2 className="text-2xl font-bold text-zinc-50 mb-1">
-            Yeni Abonelik
+            Abonelik Düzenle
           </h2>
           <p className="text-zinc-400 text-sm mb-6">
-            Takip etmek istediğin aboneliği ekle.
+            Abonelik bilgilerini güncelle.
           </p>
 
           {/* Platform */}
@@ -69,7 +90,7 @@ function SubscriptionCreatePage() {
               <select
                 value={platformId}
                 onChange={(e) => setPlatformId(e.target.value)}
-                className="w-full pl-10 pr-3 py-2 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-50 focus:outline-none focus:border-zinc-600 appearance-none"
+                className="w-full pl-10 pr-10 py-2 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-50 focus:outline-none focus:border-zinc-600 appearance-none"
               >
                 <option value="">Seçiniz</option>
                 {platforms.map((p) => (
@@ -78,6 +99,7 @@ function SubscriptionCreatePage() {
                   </option>
                 ))}
               </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500 pointer-events-none" />
             </div>
           </div>
 
@@ -106,11 +128,12 @@ function SubscriptionCreatePage() {
               <select
                 value={period}
                 onChange={(e) => setPeriod(e.target.value)}
-                className="w-full pl-10 pr-3 py-2 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-50 focus:outline-none focus:border-zinc-600 appearance-none"
+                className="w-full pl-10 pr-10 py-2 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-50 focus:outline-none focus:border-zinc-600 appearance-none"
               >
                 <option value="Aylık">Aylık</option>
                 <option value="Yıllık">Yıllık</option>
               </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500 pointer-events-none" />
             </div>
           </div>
 
@@ -143,7 +166,7 @@ function SubscriptionCreatePage() {
               disabled={!platformId || !price || !renewalDate}
               className="flex-1 py-2 bg-zinc-50 text-zinc-900 rounded-lg font-medium hover:bg-zinc-200 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              Ekle
+              Güncelle
             </button>
           </div>
         </div>
@@ -152,4 +175,4 @@ function SubscriptionCreatePage() {
   );
 }
 
-export default SubscriptionCreatePage;
+export default SubscriptionUpdatePage;
