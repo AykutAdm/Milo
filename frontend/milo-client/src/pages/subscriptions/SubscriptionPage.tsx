@@ -59,15 +59,15 @@ function SubscriptionPage() {
             className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors"
           >
             {/* Üst — logo + isim */}
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-4 mb-4">
               <img
                 src={sub.platformIconUrl}
                 alt={sub.platformName}
-                className="w-12 h-12 rounded-lg object-cover"
+                className="w-18 h-18 rounded-lg object-contain bg-white p-2"
               />
               <div>
-                <h3 className="font-semibold text-zinc-50">{sub.platformName}</h3>
-                <span className="text-xs text-zinc-500">{sub.categoryName}</span>
+                <h3 className="font-semibold text-zinc-50 text-lg">{sub.platformName}</h3>
+                <span className="text-m text-zinc-500 ">{sub.categoryName}</span>
               </div>
             </div>
 

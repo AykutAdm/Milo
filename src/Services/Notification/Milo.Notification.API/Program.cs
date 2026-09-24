@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Milo.Notification.API.Consumers;
 using Milo.Notification.API.Context;
+using Milo.Notification.API.Services.NotificationServices;
 using Milo.Notification.API.Services.UserServices;
 using Serilog;
 using System.Text;
@@ -70,6 +71,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
+//Repository
+builder.Services.AddScoped<INotificationService, NotificationService>();
 
 //Service Repository
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();

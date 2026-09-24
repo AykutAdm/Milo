@@ -11,6 +11,7 @@ namespace Milo.Subscription.Application.Features.AccountInfos.Results
         public Guid AccountInfoId { get; set; }
         public Guid PlatformId { get; set; }
         public string? PlatformName { get; set; }
+        public string? PlatformIconUrl { get; set; }
         public string? Email { get; set; }
         public string? Username { get; set; }
         public string? Description { get; set; }

@@ -71,20 +71,27 @@ function AccountInfoPage() {
       </div>
 
       {/* Kart grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
         {accountInfos.map((info) => (
           <div
             key={info.accountInfoId}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors"
+            className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors flex flex-col"
           >
             {/* Üst — platform + kullanıcı adı */}
-            <div className="mb-4">
-              <h3 className="font-semibold text-zinc-50">
-                {info.platformName}
-              </h3>
-              {info.username && (
-                <span className="text-xs text-zinc-500">{info.username}</span>
-              )}
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src={info.platformIconUrl}
+                alt={info.platformName}
+                className="w-18 h-18 rounded-lg object-contain bg-white p-2 shrink-0"
+              />
+              <div>
+                <h3 className="font-semibold text-zinc-50">
+                  {info.platformName}
+                </h3>
+                {info.username && (
+                  <span className="text-xs text-zinc-500">{info.username}</span>
+                )}
+              </div>
             </div>
 
             {/* Email */}
@@ -120,7 +127,7 @@ function AccountInfoPage() {
             </div>
 
             {/* Alt — butonlar */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 mt-auto">
               <Link
                 to={`/accounts/update/${info.accountInfoId}`}
                 className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-zinc-800 text-zinc-300 rounded-lg hover:bg-zinc-700 transition-colors text-sm"

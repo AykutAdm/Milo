@@ -45,11 +45,15 @@ namespace Milo.Subscription.Application.Mappings
 
             CreateMap<AccountInfo, GetAccountInfoQueryResult>()
                  .ForMember(dest => dest.PlatformName,
-                    opt => opt.MapFrom(src => src.Platform.PlatformName));
+                    opt => opt.MapFrom(src => src.Platform.PlatformName))
+                  .ForMember(dest => dest.PlatformIconUrl,
+                    opt => opt.MapFrom(src => src.Platform.PlatformIconUrl));
 
             CreateMap<AccountInfo, GetAccountInfoByIdQueryResult>()
                  .ForMember(dest => dest.PlatformName,
-                    opt => opt.MapFrom(src => src.Platform.PlatformName));
+                    opt => opt.MapFrom(src => src.Platform.PlatformName))
+                   .ForMember(dest => dest.PlatformIconUrl,
+                    opt => opt.MapFrom(src => src.Platform.PlatformIconUrl));
 
 
             //UserSubscription

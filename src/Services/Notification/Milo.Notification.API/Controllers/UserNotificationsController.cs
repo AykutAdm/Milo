@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Milo.Notification.API.Context;
-using Milo.Notification.API.Services.UserServices;
+using Milo.Notification.API.Services.NotificationServices;
 
 namespace Milo.Notification.API.Controllers
 {
@@ -12,27 +9,32 @@ namespace Milo.Notification.API.Controllers
     [ApiController]
     public class UserNotificationsController : ControllerBase
     {
-        private readonly NotificationDbContext _context;
-        private readonly ICurrentUserService _currentUser;
+        private readonly INotificationService _notificationService;
 
-        public UserNotificationsController(NotificationDbContext context, ICurrentUserService currentUser)
+        public UserNotificationsController(INotificationService notificationService)
         {
-            _context = context;
-            _currentUser = currentUser;
+            _notificationService = notificationService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetMyNotifications()
         {
-            var userId = _currentUser.GetUserId();
+            var result = await _notificationService.GetAllAsync();
+            return Ok(result);
+        }
 
-            var notifications = await _context.UserNotifications
-                .AsNoTracking()
-                .Where(x => x.UserId == userId)
-                .OrderByDescending(x => x.CreatedAt)
-                .ToListAsync();
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteNotification(Guid id)
+        {
+            await _notificationService.DeleteAsync(id);
+            return Ok(new { message = "Bildirim silindi." });
+        }
 
-            return Ok(notifications);
+        [HttpPut("{id}/read")]
+        public async Task<IActionResult> MarkNotificationAsRead(Guid id)
+        {
+            await _notificationService.MarkAsReadAsync(id);
+            return Ok(new { message = "Okundu olarak işaretlendi." });
         }
     }
 }
