@@ -2,7 +2,7 @@
 
 [English](./README.md) · **Türkçe**
 
-<img src="./docs/milo-logo.png" alt="Milo" width="120" />
+<img src="./docs/milo-logo.jpg" alt="Milo" width="120" />
 
 # Milo
 
@@ -141,17 +141,54 @@ flowchart TB
 
 ## Ekran Görüntüleri
 
-> _Ekran görüntüleri yakında eklenecek._
+## Screenshots
 
-<!--
-| Ana Sayfa | Genel Bakış |
-|---|---|
-| ![Landing](./docs/landing.png) | ![Dashboard](./docs/dashboard.png) |
+### Landing Page
+![Landing](./docs/Home-1.png)
 
-| Raporlar & AI | Ayarlar / 2FA |
+<details>
+<summary>More landing page sections</summary>
+
+| | |
 |---|---|
-| ![Reports](./docs/reports.png) | ![Settings](./docs/settings.png) |
--->
+| ![Landing](./docs/Home-2.png) | ![Landing](./docs/Home-3.png) |
+| ![Landing](./docs/Home-4.png) | ![Landing](./docs/Home-6.png) |
+
+![Landing](./docs/Home-7.png)
+
+</details>
+
+### Application
+
+| Dashboard | Subscriptions |
+|---|---|
+| ![Dashboard](./docs/Dashboard-1.png) | ![Subscriptions](./docs/Dashboard-2.png) |
+| **Encrypted Account Vault** | **Reports & AI Suggestions** |
+| ![Accounts](./docs/Dashboard-3.png) | ![Reports](./docs/Dashboard-4.png) |
+| **Notifications** | **Settings** |
+| ![Notifications](./docs/Dashboard-5.png) | ![Settings](./docs/Dashboard-6.png) |
+| **2FA Setup (QR)** | **2FA Login** |
+| ![2FA Setup](./docs/Dashboard-7.png) | ![2FA Login](./docs/Login-2.png) |
+
+### Authentication
+
+| Register | Login |
+|---|---|
+| ![Register](./docs/Register.png) | ![Login](./docs/Login.png) |
+
+### Renewal Reminder Email
+![Email](./docs/email.png)
+
+### Infrastructure
+
+| Hangfire | Hangfire |
+|---|---|
+| ![Hangfire](./docs/hangfire-1.png) | ![Hangfire](./docs/hangfire-2.png) |
+| **RabbitMQ** | **RabbitMQ** |
+| ![RabbitMQ](./docs/rabbitMQ-1.png) | ![RabbitMQ](./docs/rabbitMQ-2.png) |
+| **Kibana** | **Docker** |
+| ![Kibana](./docs/kibana-1.png) | ![Docker](./docs/docker.png) |
+
 
 ---
 ## Lisans
