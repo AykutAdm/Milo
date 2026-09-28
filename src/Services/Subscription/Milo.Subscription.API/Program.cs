@@ -1,6 +1,7 @@
 using Elastic.Ingest.Elasticsearch;
 using Elastic.Ingest.Elasticsearch.DataStreams;
 using Elastic.Serilog.Sinks;
+using Hangfire;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -90,14 +91,22 @@ builder.Services.AddScoped<IUserSubscriptionRepository, UserSubscriptionReposito
 
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
 
 //Service Repository
 builder.Services.AddScoped<IEncryptionService, EncryptionService>();
 
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+builder.Services.AddScoped<RenewalJobService>();
+
 //Middleware
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+
+//Hangfire
+builder.Services.AddHangfire(config => config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHangfireServer();
 
 
 builder.Services.AddControllers();
@@ -127,6 +136,8 @@ app.UseExceptionHandler();
 
 app.UseSerilogRequestLogging();
 
+app.UseHangfireDashboard("/hangfire");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -141,5 +152,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+RecurringJob.AddOrUpdate<RenewalJobService>(
+    "renewal-job",
+    service => service.ProcessRenewalsAsync(),
+    Cron.Daily   // every day
+);
 
 app.Run();

@@ -22,6 +22,24 @@ namespace Milo.Notification.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Milo.Notification.API.Entities.UserEmail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserEmails");
+                });
+
             modelBuilder.Entity("Milo.Notification.API.Entities.UserNotification", b =>
                 {
                     b.Property<Guid>("UserNotificationId")

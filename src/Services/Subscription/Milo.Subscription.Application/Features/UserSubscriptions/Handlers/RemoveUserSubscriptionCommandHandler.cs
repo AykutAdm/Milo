@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using MassTransit;
+using MediatR;
+using Milo.Messaging.Events;
 using Milo.Subscription.Application.Exceptions;
 using Milo.Subscription.Application.Features.UserSubscriptions.Commands;
 using Milo.Subscription.Application.Interfaces.Repositories;
@@ -10,11 +12,13 @@ namespace Milo.Subscription.Application.Features.UserSubscriptions.Handlers
     {
         private readonly IUserSubscriptionRepository _repository;
         private readonly ICurrentUserService _currentUser;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public RemoveUserSubscriptionCommandHandler(IUserSubscriptionRepository repository, ICurrentUserService currentUser)
+        public RemoveUserSubscriptionCommandHandler(IUserSubscriptionRepository repository, ICurrentUserService currentUser, IPublishEndpoint publishEndpoint)
         {
             _repository = repository;
             _currentUser = currentUser;
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task Handle(RemoveUserSubscriptionCommand request, CancellationToken cancellationToken)
@@ -32,6 +36,11 @@ namespace Milo.Subscription.Application.Features.UserSubscriptions.Handlers
             }
 
             await _repository.DeleteAsync(request.UserSubscriptionId);
+
+            await _publishEndpoint.Publish(new SubscriptionDeletedEvent
+            {
+                UserSubscriptionId = request.UserSubscriptionId
+            }, cancellationToken);
         }
     }
 }

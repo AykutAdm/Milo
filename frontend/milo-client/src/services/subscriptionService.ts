@@ -1,6 +1,5 @@
-import type { Subscription } from "../types/subscription";
+import type { Subscription, UpcomingRenewal } from "../types/subscription";
 import api from "./api";
-
 
 export const getSubscriptions = async (): Promise<Subscription[]> => {
   const response = await api.get<Subscription[]>(
@@ -8,7 +7,6 @@ export const getSubscriptions = async (): Promise<Subscription[]> => {
   );
   return response.data;
 };
-
 
 export const getSubscriptionById = async (
   id: string,
@@ -19,11 +17,9 @@ export const getSubscriptionById = async (
   return response.data;
 };
 
-
 export const deleteSubscription = async (id: string) => {
   await api.delete(`/subscription/userSubscriptions/${id}`);
 };
-
 
 export const createSubscription = async (subscription: {
   price: number;
@@ -44,4 +40,13 @@ export const updateSubscription = async (subscription: {
   platformId: string;
 }) => {
   await api.put("/subscription/usersubscriptions", subscription);
+};
+
+export const getUpcomingRenewals = async (
+  days = 7,
+): Promise<UpcomingRenewal[]> => {
+  const response = await api.get<UpcomingRenewal[]>(
+    `/subscription/usersubscriptions/upcoming-renewals?days=${days}`,
+  );
+  return response.data;
 };

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Milo.Notification.API.Services.NotificationServices;
+using System.Threading.Tasks;
 
 namespace Milo.Notification.API.Controllers
 {
@@ -35,6 +36,13 @@ namespace Milo.Notification.API.Controllers
         {
             await _notificationService.MarkAsReadAsync(id);
             return Ok(new { message = "Okundu olarak işaretlendi." });
+        }
+
+        [HttpGet("latest")]
+        public async Task<IActionResult> GetLatest([FromQuery] int count = 4)
+        {
+            var result = await _notificationService.GetLatestAsync(count);
+            return Ok(result);
         }
     }
 }

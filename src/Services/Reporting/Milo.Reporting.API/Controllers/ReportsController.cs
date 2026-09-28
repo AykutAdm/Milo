@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Milo.Reporting.API.Services.AIServices;
 using Milo.Reporting.API.Services.ReportingServices;
 using Milo.Reporting.API.Services.UserServices;
 
@@ -12,11 +13,13 @@ namespace Milo.Reporting.API.Controllers
     {
         private readonly IReportingRepository _repository;
         private readonly ICurrentUserService _currentUser;
+        private readonly IAiSuggestionService _aiSuggestionService;
 
-        public ReportsController(IReportingRepository repository, ICurrentUserService currentUser)
+        public ReportsController(IReportingRepository repository, ICurrentUserService currentUser, IAiSuggestionService aiSuggestionService)
         {
             _repository = repository;
             _currentUser = currentUser;
+            _aiSuggestionService = aiSuggestionService;
         }
 
         [HttpGet("monthly-total")]
@@ -34,5 +37,14 @@ namespace Milo.Reporting.API.Controllers
             var result = await _repository.GetSpendByCategoryAsync(userId);
             return Ok(result);
         }
+
+        [HttpGet("ai-suggestion")]
+        public async Task<IActionResult> GetAiSuggestion()
+        {
+            var userId = _currentUser.GetUserId();
+            var suggestion = await _aiSuggestionService.GetSuggestionAsync(userId);
+            return Ok(new { suggestion });
+        }
+
     }
 }

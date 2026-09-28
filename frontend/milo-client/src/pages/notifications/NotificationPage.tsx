@@ -6,7 +6,6 @@ import {
 } from "../../services/notificationService";
 import type { UserNotification } from "../../types/notification";
 import { Bell, Check, Trash2 } from "lucide-react";
-import api from "../../services/api";
 
 function NotificationPage() {
   const [notifications, setNotifications] = useState<UserNotification[]>([]);

@@ -49,6 +49,9 @@ namespace Milo.Reporting.API.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("UserSubscriptionId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("ReportingSubscriptionId");
 
                     b.ToTable("ReportingSubscriptions");

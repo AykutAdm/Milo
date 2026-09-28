@@ -3,6 +3,7 @@
     public class ReportingSubscription
     {
         public Guid ReportingSubscriptionId { get; set; }
+        public Guid UserSubscriptionId { get; set; }
         public Guid UserId { get; set; }
 
         public string PlatformName { get; set; }

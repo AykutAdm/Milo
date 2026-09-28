@@ -15,3 +15,12 @@ export const deleteNotification = async (id: string) => {
 export const markNotificationAsRead = async (id: string) => {
   await api.put(`/notification/userNotifications/${id}/read`);
 };
+
+export const getLatestNotifications = async (
+  count = 4,
+): Promise<UserNotification[]> => {
+  const response = await api.get(
+    `/notification/userNotifications/latest?count=${count}`,
+  );
+  return response.data;
+};

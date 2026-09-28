@@ -59,5 +59,11 @@ namespace Milo.Notification.API.Services.NotificationServices
             await _context.SaveChangesAsync();
 
         }
+
+        public async Task<List<UserNotification>> GetLatestAsync(int count)
+        {
+            var userId = _currentUserService.GetUserId();
+            return await _context.UserNotifications.AsNoTracking().Where(x => x.UserId == userId).OrderByDescending(y => y.CreatedAt).Take(count).ToListAsync();
+        }
     }
 }

@@ -2,6 +2,7 @@
 {
     public class SubscriptionCreatedEvent
     {
+        public Guid UserSubscriptionId { get; set; }
         public Guid UserId { get; set; }
         public Guid PlatformId { get; set; }
         public string PlatformName { get; set; }

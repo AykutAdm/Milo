@@ -75,6 +75,10 @@ namespace Milo.Subscription.Application.Mappings
                .ForMember(dest => dest.CategoryName,
                           opt => opt.MapFrom(src => src.Platform.Category.CategoryName));
 
+            CreateMap<UserSubscription, GetUpcomingRenewalsQueryResult>()
+                .ForMember(dest => dest.PlatformName, opt => opt.MapFrom(src => src.Platform.PlatformName))
+                .ForMember(dest => dest.PlatformIconUrl, opt => opt.MapFrom(src => src.Platform.PlatformIconUrl));
+
 
         }
     }

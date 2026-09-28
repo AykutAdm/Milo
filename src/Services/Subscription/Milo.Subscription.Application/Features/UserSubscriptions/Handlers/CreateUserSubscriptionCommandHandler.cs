@@ -39,6 +39,7 @@ namespace Milo.Subscription.Application.Features.UserSubscriptions.Handlers
             //Event Publish
             var createdEvent = new SubscriptionCreatedEvent
             {
+                UserSubscriptionId = value.UserSubscriptionId,
                 UserId = value.UserId,
                 PlatformId = value.PlatformId,
                 PlatformName = platform!.PlatformName,

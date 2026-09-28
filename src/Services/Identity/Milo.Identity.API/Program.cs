@@ -1,11 +1,13 @@
 using Elastic.Ingest.Elasticsearch;
 using Elastic.Ingest.Elasticsearch.DataStreams;
 using Elastic.Serilog.Sinks;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Milo.Identity.API.Services;
+using Milo.Identity.API.Services.QRServices;
 using Milo.Identity.Persistence.Context;
 using Milo.Identity.Persistence.Entities;
 using Serilog;
@@ -83,6 +85,21 @@ builder.Services.AddAuthentication(options =>
 
 //Services
 builder.Services.AddScoped<IJwtService, JwtService>();
+
+builder.Services.AddScoped<ITwoFactorService, TwoFactorService>();
+
+//RabbitMQ
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration["RabbitMQ:Host"], "/", h =>
+        {
+            h.Username(builder.Configuration["RabbitMQ:Username"]!);
+            h.Password(builder.Configuration["RabbitMQ:Password"]!);
+        });
+    });
+});
 
 
 

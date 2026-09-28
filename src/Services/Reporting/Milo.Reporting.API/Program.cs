@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Milo.Reporting.API.Consumers;
 using Milo.Reporting.API.Context;
+using Milo.Reporting.API.Services.AIServices;
 using Milo.Reporting.API.Services.ReportingServices;
 using Milo.Reporting.API.Services.UserServices;
 using Serilog;
@@ -15,6 +16,8 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddHttpClient();
 
 //Cors
 builder.Services.AddCors(config =>
@@ -58,10 +61,13 @@ builder.Services.AddScoped<IReportingRepository, ReportingRepository>();
 //Service Repository
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
+builder.Services.AddScoped<IAiSuggestionService, AiSuggestionService>();
+
 //RabbitMQ
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<SubscriptionCreatedConsumer>();
+    x.AddConsumer<SubscriptionDeletedConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -74,6 +80,11 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("subscription-created-reporting", e =>
         {
             e.ConfigureConsumer<SubscriptionCreatedConsumer>(context);
+        });
+
+        cfg.ReceiveEndpoint("subscription-deleted-reporting", e =>
+        {
+            e.ConfigureConsumer<SubscriptionDeletedConsumer>(context);
         });
     });
 });

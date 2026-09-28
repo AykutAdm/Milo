@@ -14,3 +14,10 @@ export const getSpendByCategory = async (): Promise<SpendByCategory[]> => {
   );
   return response.data;
 };
+
+export const getAiSuggestion = async (): Promise<string> => {
+  const response = await api.get<{ suggestion: string }>(
+    "/reporting/reports/ai-suggestion",
+  );
+  return response.data.suggestion;
+};

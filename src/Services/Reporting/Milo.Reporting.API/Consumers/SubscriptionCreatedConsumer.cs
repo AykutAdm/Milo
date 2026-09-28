@@ -21,6 +21,7 @@ namespace Milo.Reporting.API.Consumers
             var reportingSubscription = new ReportingSubscription
             {
                 ReportingSubscriptionId = Guid.NewGuid(),
+                UserSubscriptionId = message.UserSubscriptionId,
                 UserId = message.UserId,
                 PlatformName = message.PlatformName,
                 CategoryName = message.CategoryName,

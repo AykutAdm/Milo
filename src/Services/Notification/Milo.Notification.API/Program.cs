@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Milo.Notification.API.Consumers;
 using Milo.Notification.API.Context;
+using Milo.Notification.API.Services.MailServices;
 using Milo.Notification.API.Services.NotificationServices;
 using Milo.Notification.API.Services.UserServices;
 using Serilog;
@@ -78,6 +79,8 @@ builder.Services.AddScoped<INotificationService, NotificationService>();
 //Service Repository
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
+builder.Services.AddScoped<IMailService, MailService>();
+
 
 builder.Services.AddHttpContextAccessor();
 
@@ -85,6 +88,8 @@ builder.Services.AddMassTransit(x =>
 {
     //Save Consumer
     x.AddConsumer<SubscriptionCreatedConsumer>();
+    x.AddConsumer<RenewalReminderConsumer>();
+    x.AddConsumer<UserRegisteredConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -98,6 +103,16 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("subscription-created-notification", e =>
         {
             e.ConfigureConsumer<SubscriptionCreatedConsumer>(context);
+        });
+
+        cfg.ReceiveEndpoint("renewal-reminder-notification", e =>
+        {
+            e.ConfigureConsumer<RenewalReminderConsumer>(context);
+        });
+
+        cfg.ReceiveEndpoint("user-registered-notification", e =>
+        {
+            e.ConfigureConsumer<UserRegisteredConsumer>(context);
         });
     });
 });

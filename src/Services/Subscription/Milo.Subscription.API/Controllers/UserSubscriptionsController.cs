@@ -52,5 +52,12 @@ namespace Milo.Subscription.API.Controllers
             await _mediator.Send(new RemoveUserSubscriptionCommand(id));
             return Ok(new { message = "Abonelik silindi." });
         }
+
+        [HttpGet("upcoming-renewals")]
+        public async Task<IActionResult> GetUpcomingRenewals([FromQuery] int days = 7)
+        {
+            var result = await _mediator.Send(new GetUpcomingRenewalsQuery(days));
+            return Ok(result);
+        }
     }
 }

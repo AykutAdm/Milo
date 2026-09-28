@@ -14,17 +14,22 @@ import AccountInfoCreatePage from "./pages/accounts/AccountInfoCreatePage";
 import NotificationPage from "./pages/notifications/NotificationPage";
 import ReportPage from "./pages/reports/ReportPage";
 import ProtectedRoute from "./guards/ProtectedRoute";
+import HomePage from "./pages/home/HomePage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
+import SettingsPage from "./pages/userSettings/SettingsPage";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
           <Route element={<ProtectedRoute />}>
             <Route element={<UserLayout />}>
+              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/subscription" element={<SubscriptionPage />} />
               <Route
                 path="/subscription/create"
@@ -46,6 +51,7 @@ function App() {
 
               <Route path="notifications" element={<NotificationPage />} />
               <Route path="reports" element={<ReportPage />} />
+              <Route path="settings" element={<SettingsPage />} />
             </Route>
           </Route>
         </Routes>

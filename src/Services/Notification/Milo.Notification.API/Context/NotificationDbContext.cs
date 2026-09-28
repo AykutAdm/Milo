@@ -10,5 +10,6 @@ namespace Milo.Notification.API.Context
         }
 
         public DbSet<UserNotification> UserNotifications { get; set; }
+        public DbSet<UserEmail> UserEmails { get; set; }
     }
 }

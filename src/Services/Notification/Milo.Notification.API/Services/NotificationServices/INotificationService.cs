@@ -8,5 +8,6 @@ namespace Milo.Notification.API.Services.NotificationServices
         Task DeleteAsync(Guid notificationId);
 
         Task MarkAsReadAsync(Guid notificationId);
+        Task<List<UserNotification>> GetLatestAsync(int count);
     }
 }
