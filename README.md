@@ -1,6 +1,6 @@
 <div align="center">
 
-**English** · [Türkçe](./README.tr.md)
+**English** · [Turkish](./README.tr.md)
 
 <img src="/docs/milo-logo.jpg" alt="Milo" width="120" />
 
